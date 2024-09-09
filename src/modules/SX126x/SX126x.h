@@ -1091,6 +1091,13 @@ class SX126x: public PhysicalLayer {
     int16_t spectralScanStart(uint16_t numSamples, uint8_t window = RADIOLIB_SX126X_SPECTRAL_SCAN_WINDOW_DEFAULT, uint8_t interval = RADIOLIB_SX126X_SCAN_INTERVAL_8_20_US);
     
     /*!
+      \brief
+      \param buf String buffer to store version in.
+      \param buf_size Length of buffer in bytes (should be 16, or version will be truncated).
+    */
+    void getFwVersion(char *buf, size_t buf_size);
+
+    /*!
       \brief Abort an ongoing spectral scan.
     */
     void spectralScanAbort();
