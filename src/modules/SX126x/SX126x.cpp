@@ -1623,11 +1623,16 @@ int16_t SX126x::spectralScanStart(uint16_t numSamples, uint8_t window, uint8_t i
   // abort first - not sure if this is strictly needed, but the example code does this
   spectralScanAbort();
 
+  // set spectral scan gain mode
+  uint8_t rxGain = RADIOLIB_SX126X_RX_GAIN_SPECTRAL_SCAN;
+  int16_t state = writeRegister(RADIOLIB_SX126X_REG_RX_GAIN, &rxGain, 1);
+  RADIOLIB_ASSERT(state);
+
   // set the RSSI window size
   this->mod->SPIwriteRegister(RADIOLIB_SX126X_REG_RSSI_AVG_WINDOW, window);
 
   // start Rx with infinite timeout
-  int16_t state = setRx(RADIOLIB_SX126X_RX_TIMEOUT_INF);
+  state = setRx(RADIOLIB_SX126X_RX_TIMEOUT_INF);
   RADIOLIB_ASSERT(state);
 
   // now set the actual spectral scan parameters
