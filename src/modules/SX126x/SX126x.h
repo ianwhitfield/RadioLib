@@ -1157,6 +1157,13 @@ class SX126x: public PhysicalLayer {
     int16_t uploadPatch(const uint32_t* patch, size_t len, bool nonvolatile = true);
 
     /*!
+      \brief
+      \param buf String buffer to store version in.
+      \param buf_size Length of buffer in bytes (should be 16, or version will be truncated).
+    */
+    void getFwVersion(char *buf, size_t buf_size);
+
+    /*!
       \brief Start spectral scan. Requires binary path to be uploaded.
       \param numSamples Number of samples for each scan. Fewer samples = better temporal resolution.
       \param window RSSI averaging window size.
